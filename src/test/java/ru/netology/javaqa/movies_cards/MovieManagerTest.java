@@ -16,7 +16,7 @@ class MovieManagerTest {
     void shouldAddNoMovie() {
         MovieManager movies = new MovieManager();
 
-        MovieCard[] expected = { };
+        MovieCard[] expected = {};
         MovieCard[] actual = movies.findAll();
 
         Assertions.assertArrayEquals(expected, actual);
@@ -46,7 +46,6 @@ class MovieManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
-
     @Test
     void shouldFindLastIfDefault() {
         MovieManager movies = new MovieManager();
@@ -63,30 +62,41 @@ class MovieManagerTest {
     }
 
     @Test
-    void shouldFindLastIfCustomLimit() {
-        MovieManager movies = new MovieManager(4);
+    void shouldFindLastIfBelowDefault() {
+        MovieManager movies = new MovieManager();
         movies.addMovie(movie1);
         movies.addMovie(movie2);
         movies.addMovie(movie3);
         movies.addMovie(movie3);
-        movies.addMovie(movie3);
 
-        MovieCard[] expected = {movie3, movie3, movie3, movie2};
+        MovieCard[] expected = {movie3, movie3, movie2, movie1};
         MovieCard[] actual = movies.findLast();
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    void shouldFindLast() {
-        MovieManager movies = new MovieManager();
+    void shouldFindLastIfCustomLimit() {
+        MovieManager movies = new MovieManager(4);
         movies.addMovie(movie1);
         movies.addMovie(movie2);
         movies.addMovie(movie3);
         movies.addMovie(movie3);
+
+        MovieCard[] expected = {movie3, movie3, movie2, movie1};
+        MovieCard[] actual = movies.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldFindLastIfBelowCustomLimit() {
+        MovieManager movies = new MovieManager(4);
+        movies.addMovie(movie1);
+        movies.addMovie(movie2);
         movies.addMovie(movie3);
 
-        MovieCard[] expected = {movie3, movie3, movie3, movie2, movie1};
+        MovieCard[] expected = {movie3, movie2, movie1};
         MovieCard[] actual = movies.findLast();
 
         Assertions.assertArrayEquals(expected, actual);

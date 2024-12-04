@@ -32,8 +32,7 @@ public class MovieManager {
         int resultedLength;
         if (movies.length < limit) {
             resultedLength = movies.length;
-        }
-        else {
+        } else {
             resultedLength = limit;
         }
         MovieCard[] tmp = new MovieCard[resultedLength];
